@@ -5,7 +5,16 @@ For Ubuntu<br />
 The script creates files sequentially, each file created by one provider, using all available providers until all files being created.
 If one of the providers finishing the job before others, it will start to create a new files without waiting.<br />
 
-When the job is done you will get a folders with files. You need to merge all .bin files into one folder.
+To start you need to download postcli to the same folder<br />
+https://github.com/spacemeshos/post/releases<br />
+
+To generate the key.bin I'm using postkey created by Doge Monster<br />
+https://github.com/DogeMonster/shibamesh_post_key_generator/releases<br />
+The program will generate key.bin and display the node ID you will need to insert into the script (hex)<br />
+
+
+
+When the job is done you will get a folders with files. You need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />
 For example this one: https://www.calculator.net/hex-calculator.html<br />

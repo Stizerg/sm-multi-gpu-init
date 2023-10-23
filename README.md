@@ -1,4 +1,4 @@
-# sm-multi-gpu-init<br />
+# sm-multi-gpu-init
 <br />
 For Ubuntu<br />
 <br />

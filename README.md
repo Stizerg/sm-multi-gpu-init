@@ -2,8 +2,8 @@
 <br />
 For Ubuntu<br />
 <br />
-The script creates files sequentially, each file created by one provider, using all available providers until all files being created.
-If one of the providers finishing the job before others, it will start to create next file without waiting.<br />
+The script creates files sequentially, each file created by one provider, using all available providers until all files are created.
+If one of the providers finishes the job before others, it will start to create the next file without waiting.<br />
 
 To start you need to download postcli to the same folder<br />
 https://github.com/spacemeshos/post/releases<br />

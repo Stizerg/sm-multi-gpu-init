@@ -11,9 +11,9 @@ https://github.com/spacemeshos/post/releases<br />
 To generate the key.bin I'm using postkey created by Doge Monster<br />
 https://github.com/DogeMonster/shibamesh_post_key_generator/releases<br />
 The program will generate key.bin and display the node ID you will need to insert into the script (hex)<br />
-
-
-
+<br />
+Also you need to make sure you are using the latest Highest ATX<br />
+<br />
 When the job is done you will get a folders with files. You need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />

@@ -14,7 +14,7 @@ The program will generate key.bin and display the node ID you will need to inser
 <br />
 Also you need to make sure you are using the latest Highest ATX<br />
 <br />
-When the job is done you will get a folders with files. You need to merge all .bin files into one folder.<br />
+When the job is done you will get the folders with files. You need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />
 For example this one: https://www.calculator.net/hex-calculator.html<br />

@@ -1,4 +1,7 @@
-# sm-multi-gpu-init
+# sm-multi-gpu-init<br />
+<br />
+For Ubuntu<br />
+<br />
 The script creates files sequentially, each file created by one provider, using all available providers until all files being created.
 If one of the providers finishing the job before others, it will start to create a new files without waiting.<br />
 

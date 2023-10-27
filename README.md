@@ -5,10 +5,10 @@ For Ubuntu<br />
 The script creates files sequentially, each file created by one provider, using all available providers until all files are created.
 If one of the providers finishes the job before others, it will start to create the next file without waiting.<br />
 Initialization will continue from where it was interrupted.<br />
-
+<br />
 To start you need to download postcli to the same folder<br />
 https://github.com/spacemeshos/post/releases<br />
-
+<br />
 To generate the key.bin I'm using postkey created by Doge Monster<br />
 https://github.com/DogeMonster/shibamesh_post_key_generator/releases<br />
 The program will generate key.bin and display the node ID you will need to insert into the script (hex)<br />

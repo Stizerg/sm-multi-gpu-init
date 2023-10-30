@@ -36,5 +36,6 @@ Decimal value:<br />
 
 Positive result means the second value is smaller, negative result means the first value is smaller.
 In this case the second nonce value is smaller and we need to copy the json file from folder 1.<br />
+If you copy this values manually don't forget to copy "Nonce" too.<br />
 <br />
 Happy smeshing!

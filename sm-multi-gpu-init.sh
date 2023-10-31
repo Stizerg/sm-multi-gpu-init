@@ -22,7 +22,7 @@ nodeId="3110232cabf7a274ec817d524723bc44b441ba6592b3e12cdcb137ae5a49ab3c"  # You
 fileSize=$((2 * 1024 * 1024 * 1024))  # 2 GiB  (For larger volumes, for convenience, you can increase to 4,8,16+ GiB)
 startFromFile=0
 numUnits=4  # 64 GiB each (mininum 4)
-dataDir="/mnt/smh32/test"
+dataDir="/mnt/node/post"
 # end edit section
 
 filesTotal=$(($numUnits * 64 * 1024 * 1024 * 1024 / $fileSize))

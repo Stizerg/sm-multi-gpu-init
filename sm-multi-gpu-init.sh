@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version 1.0.4
+# Version 1.0.4 
 # The program initializes files sequentially.
 # Each file is initialized by one provider.
 # When the provider finishes initializing the file, it is given the next one.

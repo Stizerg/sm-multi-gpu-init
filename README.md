@@ -18,8 +18,9 @@ If you updating the script you need to use the same atx as before.
 <br />
 <br />
 The section below about the nonce is obsolete, starting from version 1.1.0 the script doesn't create subfolders and you don't need to merge files manually<br />
-If you updating the script in the middle of creating the files you still need to check for lowest nonce.
-### Merging files
+If you updating the script in the middle of creating the files you still need to check for lowest nonce.<br />
+
+## Merging files
 If you used previous version of the script and when the job is done you got multiple folders with files, you will need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />

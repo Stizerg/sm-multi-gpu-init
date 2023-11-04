@@ -15,6 +15,10 @@ The program will generate key.bin and display the node ID you will need to inser
 <br />
 Also you need to make sure you are using the latest Highest ATX<br />
 <br />
+<br />
+The section below about the nonce is obsolete, starting from version 1.1.0 the script doesn't create subfolders and you don't need to merge files manually<be />
+If you updating the script in the middle of creating the files you still need to check for lowest nonce.
+--------------------------------------------------------</be />
 When the job is done you will get the folders with files. You need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />

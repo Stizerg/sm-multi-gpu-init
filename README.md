@@ -13,13 +13,14 @@ To generate the key.bin I'm using postkey created by Doge Monster<br />
 https://github.com/DogeMonster/shibamesh_post_key_generator/releases<br />
 The program will generate key.bin and display the node ID you will need to insert into the script (hex)<br />
 <br />
-Also you need to make sure you are using the latest Highest ATX<br />
+Also you need to make sure that for new POST you are using the latest Highest ATX<br />
+If you updating the script you need to use the same atx as before.
 <br />
 <br />
-The section below about the nonce is obsolete, starting from version 1.1.0 the script doesn't create subfolders and you don't need to merge files manually<be />
+The section below about the nonce is obsolete, starting from version 1.1.0 the script doesn't create subfolders and you don't need to merge files manually<br />
 If you updating the script in the middle of creating the files you still need to check for lowest nonce.
---------------------------------------------------------<br />
-When the job is done you will get the folders with files. You need to merge all .bin files into one folder.<br />
+### Merging files
+If you used previous version of the script and when the job is done you got multiple folders with files, you will need to merge all .bin files into one folder.<br />
 You also need to copy postdata_metadata.json with lowest "NonceValue".<br />
 To make it easy you can use any HEX calculator.<br />
 For example this one: https://www.calculator.net/hex-calculator.html<br />
@@ -40,6 +41,8 @@ Decimal value:<br />
 
 Positive result means the second value is smaller, negative result means the first value is smaller.
 In this case the second nonce value is smaller and we need to copy the json file from folder 1.<br />
-If you copy this values manually don't forget to copy "Nonce" too.<br />
+If you copy this values manually ***don't forget to copy "Nonce" too.***<br />
+<br />
+<br />
 <br />
 Happy smeshing!

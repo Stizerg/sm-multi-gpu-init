@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version 1.1.0
+# Version 1.1.2
 # The program initializes files sequentially.
 # Each file is initialized by one provider.
 # When the provider finishes initializing the file, it is given the next one.
@@ -17,15 +17,25 @@
 
 # edit this section
 providers=(0 1)  # in this case GPU0 and GPU1 are used (also you can use CPU, its number is 4294967295)
-atx="DDDC920DD577749ECF0F2CC8E96D38C3F792C71350780090AD6F63164C519BE6"  # Use latest Highest ATX (Hex)
-nodeId="0411201366addcec555ecca5115839706582f896d85521456814e301066886c8"  # Your public nodeId (smehserId)
+atx="CF37DB1798887CE3AEC5B361941753D4C91C2B613823E3FC3718E303200727CB"  # Use latest Highest ATX (Hex)
+nodeId="2411201366addcec555ecca5115839706582f896d85521456814e301066886c8"  # Your public nodeId (smehserId)
 fileSize=$((2 * 1024 * 1024 * 1024))  # 2 GiB  (For larger volumes, for convenience, you can increase to 4,8,16+ GiB)
-startFromFile=0
 numUnits=4  # 64 GiB each (mininum 4)
+
+# If you want to manually set the scope of work you can set this following variables
+startFromFile=0	# The file number the script starts from
+finishAtFile=0	# The last file that will be created. Calculated from "numUnits" if set to 0
+
 dataDir="/mnt/node/post"
 # end edit section
 
-filesTotal=$(($numUnits * 64 * 1024 * 1024 * 1024 / $fileSize))
+if [[ $finishAtFile -gt 0 ]]; then
+filesToDo=$(($finishAtFile +1))
+filesTotal=$(($filesToDo - $startFromFile))
+else
+filesToDo=$(($numUnits * 64 * 1024 * 1024 * 1024 / $fileSize))
+filesTotal=$filesToDo
+fi
 echo "Total files $filesTotal"
 declare -A processes
 declare -a filesArray
@@ -83,7 +93,7 @@ if [[ $amt -gt 0 ]]; then
 		    	echo "-----------------------------------------------------------------"
 		    	nice -n 19 ./postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dirName -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
 		    	((fileCounter++))
-		    	if [[ "$fileCounter" -eq "$filesTotal" ]]; then
+		    	if [[ "$fileCounter" -eq "$filesToDo" ]]; then
 		        	mainLoop=false
 		        	break 2
 		    	fi
@@ -98,7 +108,7 @@ fi
 
 # All previously created files have been done, we continue with the normal procedure
 if $mainLoop; then
-	while (( fileCounter < filesTotal )); do
+	while (( fileCounter < filesToDo )); do
     	for p in "${providers[@]}"; do
             if [ -z "${processes[$p]}" ] || ! kill -0 ${processes[$p]} 2> /dev/null; then
                 echo " Provider $p starts processing a new file: $dataDir/postdata_$fileCounter.bin (Total files:$filesTotal)"

@@ -10,7 +10,8 @@ To start you need to download postcli to the same folder<br />
 https://github.com/spacemeshos/post/releases<br />
 <br />
 To generate the key.bin I'm using postkey created by Doge Monster<br />
-https://github.com/DogeMonster/shibamesh_post_key_generator/releases<br />
+<s>https://github.com/DogeMonster/shibamesh_post_key_generator/releases</s><br />
+(unfortunately this page isn't available anymore)<br />
 The program will generate key.bin and display the node ID you will need to insert into the script (hex)<br />
 <br />
 Also you need to make sure that for new POST you are using the latest Highest ATX<br />

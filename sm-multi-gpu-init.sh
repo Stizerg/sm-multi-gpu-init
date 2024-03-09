@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version 1.1.2
+# Version 1.1.3
 # The program initializes files sequentially.
 # Each file is initialized by one provider.
 # When the provider finishes initializing the file, it is given the next one.
@@ -48,14 +48,13 @@ providersLength=${#providers[@]}
 # Creating an array of existing or missing files
 while IFS= read -r line; do
     dirName=$(dirname "$line")
-    #dirNum=${dirName##*/}
     
     fileName=$(basename "$line")
     fileNum=${fileName#*_}
     fileNum=${fileNum%.*}
     
     filesArray+=("$dirName:$fileNum")
-done < <(find "$dataDir" -type f -name 'postdata_*.bin')
+done < <(find "$dataDir" -maxdepth 1 -type f -name 'postdata_*.bin')
 
 IFS=$'\n' filesArray=($(sort -t ":" -k2n <<<"${filesArray[*]}"))
 unset IFS
@@ -65,7 +64,7 @@ for i in "${!filesArray[@]}"; do
 
     while (( currentFileNum != expectedFileNum )); do
         currentProvider=${providers[$providerCounter]}
-        filesArray+=("$dataDir/$currentProvider:$expectedFileNum")
+        filesArray+=("$dataDir:$expectedFileNum")
         ((providerCounter=(providerCounter+1)%providersLength))
         ((expectedFileNum++))
     done
@@ -86,12 +85,11 @@ if [[ $amt -gt 0 ]]; then
 	    	IFS=":"
 	    	read -ra pFile <<< "$postFile"
 	    	IFS=$oldIFS
-	    	dirName=${postFile%%:*}
 
 	    	if [ -z "${processes[$p]}" ] || ! kill -0 ${processes[$p]} 2> /dev/null; then
-		    	echo "Checking existing file: $dirName/postdata_$fileCounter.bin"
+		    	echo "Checking existing file: $dataDir/postdata_$fileCounter.bin"
 		    	echo "-----------------------------------------------------------------"
-		    	nice -n 19 ./postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dirName -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
+		    	nice -n 19 ./postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dataDir -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
 		    	((fileCounter++))
 		    	if [[ "$fileCounter" -eq "$filesToDo" ]]; then
 		        	mainLoop=false
@@ -126,4 +124,5 @@ echo "Waiting for background processes to finish"
 echo "------------------------------------------"
 wait
 echo "All done!"
+read -p "Press enter to continue"
 read -p "Press enter to continue"

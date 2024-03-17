@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version 1.1.3
+# Version 1.1.4
 # The program initializes files sequentially.
 # Each file is initialized by one provider.
 # When the provider finishes initializing the file, it is given the next one.
@@ -27,6 +27,7 @@ startFromFile=0	# The file number the script starts from
 finishAtFile=0	# The last file that will be created. Calculated from "numUnits" if set to 0
 
 dataDir="/mnt/node/post"
+postcli="./postcli"
 # end edit section
 
 if [[ $finishAtFile -gt 0 ]]; then
@@ -89,7 +90,7 @@ if [[ $amt -gt 0 ]]; then
 	    	if [ -z "${processes[$p]}" ] || ! kill -0 ${processes[$p]} 2> /dev/null; then
 		    	echo "Checking existing file: $dataDir/postdata_$fileCounter.bin"
 		    	echo "-----------------------------------------------------------------"
-		    	nice -n 19 ./postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dataDir -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
+		    	nice -n 19 $postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dataDir -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
 		    	((fileCounter++))
 		    	if [[ "$fileCounter" -eq "$filesToDo" ]]; then
 		        	mainLoop=false
@@ -111,7 +112,7 @@ if $mainLoop; then
             if [ -z "${processes[$p]}" ] || ! kill -0 ${processes[$p]} 2> /dev/null; then
                 echo " Provider $p starts processing a new file: $dataDir/postdata_$fileCounter.bin (Total files:$filesTotal)"
                 echo "-----------------------------------------------------------------"
-                nice -n 19 ./postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dataDir -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
+                nice -n 19 $postcli -provider $p -commitmentAtxId $atx -id $nodeId -labelsPerUnit 4294967296 -maxFileSize $fileSize -numUnits $numUnits -datadir $dataDir -fromFile $fileCounter -toFile $fileCounter & processes[$p]=$!
                 ((fileCounter++))
             fi
     	done
